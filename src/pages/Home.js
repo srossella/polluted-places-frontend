@@ -1,19 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-
+import Navbar from '../components/Navbar';
+import { Button } from '@mui/material';
 function Home(props) {
     return (
         <div>
-            this is home page 
-            <Link to="/upload">
-                    <button >
-                      go to upload place
-                    </button>
-            </Link>
+          
+           Here we keep track of all the polluted places 
+           <br/>
+           <br/>
             <Link to="/search">
-                    <button >
-                      go to search
-                    </button>
+              <Button >
+                  Browse polluted places
+              </Button>
             </Link>
         </div>
     );

@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 
 function Search(props) {
     return (
-        <div>
-            this is search page 
-            <GetPlace/>
-            <Link to="/">
-                Home
-            </Link>
-        </div>
+        <>
+           
+             <GetPlace/> 
+          
+        </>
     );
 }
 

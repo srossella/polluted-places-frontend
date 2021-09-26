@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 function Upload(props) {
     return (
         <div>
-            this is the upload page 
+          Here you can report a polluted place. 
+          Please note all the fileds are required. 
             <PostPlace/>
-            <Link to="/">
-            Home
-            </Link>
+         
         </div>
     );
 }
