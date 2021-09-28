@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home.js'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Footer from './components/Footer.js'
-import Place from './components/Place';
+import Place from './components/PlaceCard';
 import NotFound from './pages/NotFound';
 
 
@@ -17,7 +17,9 @@ function App() {
     <div className="App">
        
                 <Router>
-                  <Navbar/>
+                  <Navbar />
+                  <br/>
+                  
                   <Switch>
                     <Route exact path="/">
                       <Home/> 

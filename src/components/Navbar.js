@@ -12,7 +12,7 @@ const Navbar = () => {
    
     return (
         <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" >
+        <AppBar position="static" color='primary'>
           <Toolbar>
             <IconButton
               size="large"
@@ -25,9 +25,14 @@ const Navbar = () => {
                 <HomeIcon/>
             </Link>
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" textAlign='left' component="div" sx={{ flexGrow: 1 }}>
               Polluted places
             </Typography>
+            <Button color="inherit">
+                <Link to={'/search'} style={{ textDecoration: 'none'}}> 
+                    Search
+                </Link>
+            </Button>
             <Button color="inherit">
                 <Link to={'/upload'} style={{ textDecoration: 'none'}}> 
                     Upload

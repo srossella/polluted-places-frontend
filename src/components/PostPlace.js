@@ -9,7 +9,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { InputLabel } from '@mui/material';
+import PlaceCard from './PlaceCard';
+import { Card } from '@mui/material';
 function PostPlace() {
 
     const [place, setPlace] = useState({})
@@ -39,6 +44,8 @@ function PostPlace() {
             .then((res) => {
                 console.log(res)
                 setPostedPlace({
+                    id:res.data.id,
+                    date:res.data.date,
                     imagePath: res.data.filepath,
                     street: res.data.street,
                     town: res.data.town,
@@ -46,11 +53,19 @@ function PostPlace() {
                 })
             })
     }
-    
+   
     return (
-        <>
+        <div>
+        <Grid container spacing={2} margin={2} style={{justifyContent:'space-between'}} >
+            <Card style={{padding:'10px', backgroundColor:'#DCEDFE'}}>
+            
+            <h4> Upload a new place</h4>
+            
             <form onSubmit={submitForm}> 
-                <TextField
+            
+                <Grid item md={12} padding={0.5}>
+                   
+                    <TextField
                     id="outlined-name"
                     label="Street"
                     placeholder="Street" 
@@ -58,7 +73,11 @@ function PostPlace() {
                     required="required"
                     onChange={(e) => setPlace({...place, street: e.target.value})} 
                 />
-                <TextField
+                    
+                </Grid>
+                <Grid item md={12} padding={1}>
+                    
+                    <TextField
                     id="outlined-name"
                     label="Town"
                     placeholder="Town" 
@@ -66,7 +85,11 @@ function PostPlace() {
                     required="required"
                     onChange={(e) => setPlace({...place, town: e.target.value})} 
                 />
-                <TextField
+                    
+                </Grid>
+                <Grid item md={12} padding={1}>
+                   
+                    <TextField
                     id="outlined-name"
                     label="Province"
                     placeholder="Province" 
@@ -74,29 +97,52 @@ function PostPlace() {
                     required="required"
                     onChange={(e) => setPlace({...place, province: e.target.value})} 
                 />
-                    <input 
-                    type="file" 
-                        name="image" 
-                        accept="image/*" 
-                        required="required" 
-                        multiple={false} 
-                        onChange={(e) => {setFile(e.target.files[0])}}
-                    />
-                    <input type="reset" value="Reset" onClick={clearUpload} />   
-                <Button variant="contained"  type="submit">Submit place </Button>
+                    
+                </Grid>
+                <Grid item md={12} padding={1} >
+              <InputLabel variant='standard' color='primary' 
+                    style={{ cursor: 'pointer',border:'#1273de solid 1px', padding:'8px',
+                    }}>
+                  Upload file
+                        <input 
+                            style={{display:'absolute', width:'1px', height:'1px', zIndex:'-1'}}
+                            type="file" 
+                            name="image" 
+                            accept="image/*" 
+                            required="required" 
+                            multiple={false} 
+                            onChange={(e) => {setFile(e.target.files[0])}}
+                        /> 
+               </InputLabel>
+                    {
+                        file
+                        ? file.name
+                        : null
+                    }
+                        
+                </Grid>   
+                <Grid item md={12} padding={1}>
+                     <Button variant="contained"  type="submit">Submit place </Button>
+                </Grid> 
+                <Grid item md={12} padding={1}>
+                    <Button variant="outlined" type="reset" value="Reset" onClick={clearUpload} >Reset</Button>
+                </Grid>   
+                </form>
+                </Card>
+           
                 { postedPlace.street ?
-                 (  <>
-                        Your place has been submitted: {postedPlace.street}, {postedPlace.town}, {postedPlace.province}
-                    </> 
+                 (  <Card style={{display:'flex',padding:'10px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
+                        <h4>Your place with id {postedPlace.id} has been submitted.</h4>
+                        <PlaceCard place={postedPlace}/>
+                    
+                    </Card> 
                  )
                  :null }
-
-                <img src={`http://localhost:8000/${postedPlace.imagePath}`} alt='' width='300px'/> 
                 <br/>
                 
-            </form>
-            
-        </>
+         
+            </Grid>
+        </div>
     );
 }
 

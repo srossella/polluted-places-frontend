@@ -4,19 +4,9 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 import Button from '@mui/material/Button';
-
+import PlaceCard from './PlaceCard';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Popup from './Popup';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -73,6 +63,7 @@ const Search = styled('div')(({ theme }) => ({
 function GetPlace() {
 
     const [placeId, setPlaceId] = useState('');
+    const [placeTown, setPlaceTown] = useState('');
     const [places, setPlaces] = useState([]);
 
     const retrieveData = url => { axios.get( url ).then( res => {
@@ -84,6 +75,7 @@ function GetPlace() {
                         town: res.data[i].town,
                         province: res.data[i].province,
                         imagePath: res.data[i].filepath,
+                        date: res.data[i].date
                     }
                     placesReceived.push(place)
                 }
@@ -98,10 +90,17 @@ function GetPlace() {
 
     const searchById = () => {
         if (placeId){
-            const url= '/places/'+ placeId;
+            const url= '/places/id/'+ placeId;
             retrieveData(url)
         }
     }
+    const searchByTown = () => {
+      if (placeTown){
+          const url= '/places/town/'+ placeTown;
+          retrieveData(url)
+      }
+  }
+
 
     const searchAll = () => {
         const url= '/places/';
@@ -115,59 +114,47 @@ function GetPlace() {
     
     return (
         <>
-        <Search style={{width:'200px', margin:'auto'}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Type ID…"
-                inputProps={{ 'aria-label': 'search'}}
-                type="number"
-                min="0"
-                onChange={(e) => setPlaceId( e.target.value )} 
-            />
-          </Search>
+        <Grid container display="flex" style={{alignItems:'end', margin:'10px', maxWidth:'800px', margin:'auto'}} >
+        <Grid item xs={12} md={6} lg={6}>
+            <Search style={{width:'200px', margin:'auto'}}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Type ID…"
+                    inputProps={{ 'aria-label': 'search'}}
+                    type="number"
+                    min="0"
+                    onChange={(e) => setPlaceId( e.target.value )} 
+                />
+            </Search>
 
             <Button variant="contained" onClick={searchById} >Search place by ID</Button>
-           
-            <Button variant="contained" onClick={searchAll} >Show all places</Button> 
+          </Grid>
+
+          <Grid item xs={12} md={6}  lg={6}>
+              <Search style={{width:'200px', margin:'auto'}}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Type town..."
+                  inputProps={{ 'aria-label': 'search'}}
+                  onChange={(e) => setPlaceTown( e.target.value )} 
+                />
+              </Search>
+              <Button variant="contained" onClick={searchByTown} >Search place by town</Button>
+          </Grid>
+
+          <Grid item xs={12} md={12}  lg={12} style={{marginTop:'20px'}} >
+              <Button variant="contained" color='success' onClick={searchAll} >Show all places</Button> 
+          </Grid>
+
+            </Grid>
             <Grid container  display="flex" style={{ justifyContent: 'center'}} >
                                
                  {places.map(place=>(
-                   <div style={{ padding: '10px'}} key={place.id}>
-                      <Card style={{ width: 300 }} >
-                        <CardHeader
-                            avatar={
-                            <Avatar sx={{ bgcolor: red[500] }} aria-label="place">
-                                {place.id}
-                            </Avatar>
-                            }
-                            style={{ textAlign: 'left'}}
-                            title={`${place.street}, ${place.town}, ${place.province}`}
-                            subheader="September 14, 2016"
-                        />
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={`http://localhost:8000/${place.imagePath}`}
-                            alt="Polluted place"
-                        />
-                         <CardActions disableSpacing>
-                        
-                               
-                            <IconButton aria-label="update">
-                            <Link to={`/update/${place.id}`} style={{ textDecoration: 'none'}}> 
-                                     <Button >Update </Button>
-                                </Link>
-                            </IconButton>
-                            <IconButton aria-label="delete">
-                                <Link to={`/delete/${place.id}`} style={{ textDecoration: 'none'}}> 
-                                     <Button >Delete </Button>
-                                </Link>
-                            </IconButton>
-                        </CardActions>
-                    </Card>
-                   </div>
+                  <PlaceCard place={place}/>
                 )
                 )}
            

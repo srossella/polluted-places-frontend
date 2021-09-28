@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   footer:{
     position: 'fixed',
     bottom:'0', 
+    backgroundColor:'white',
     height:'30px',
     width:'100vw',
     display:'flex',

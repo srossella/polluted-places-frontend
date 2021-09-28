@@ -9,8 +9,8 @@ function Home(props) {
            Here we keep track of all the polluted places 
            <br/>
            <br/>
-            <Link to="/search">
-              <Button >
+            <Link to="/search" style={{textDecoration:'none'}}>
+              <Button variant='contained' >
                   Browse polluted places
               </Button>
             </Link>

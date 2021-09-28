@@ -1,15 +1,15 @@
 import React from 'react';
 import UpdatePlace from '../components/UpdatePlace';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function Update(props) {
     return (
-        <div>
-            this is the update page 
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', margin:'auto'}}>
+            
+            
+        
             <UpdatePlace/>
-            <Link to="/">
-                Home
-            </Link>
+           
         </div>
     );
 }
