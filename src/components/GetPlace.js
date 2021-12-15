@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-
+import PlacesContainer from  './PlacesContainer';
 import Button from '@mui/material/Button';
-import PlaceCard from './PlaceCard';
 import Grid from '@material-ui/core/Grid';
 
 import { styled, alpha } from '@mui/material/styles';
@@ -15,6 +14,11 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { fontSize } from '@mui/system';
+import { Card } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setAllPlaces } from '../redux/actions/productActions';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -61,13 +65,15 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
 function GetPlace() {
+  const {places} = useSelector(state => state.setAllPlaces)
+  const dispatch = useDispatch()
 
-    const [placeId, setPlaceId] = useState('');
-    const [placeTown, setPlaceTown] = useState('');
-    const [places, setPlaces] = useState([]);
-
-    const retrieveData = url => { axios.get( url ).then( res => {
-                const placesReceived = [];
+  const retrieveData = async (url) => {
+      const res = await axios.get(url)
+      .catch(err=>console.log('err: '+err))
+      
+      const placesReceived = [];
+      if(res.data && res.data.length>0){
                 for (let i = 0; i < res.data.length; i++) {
                     const place = {
                         id: res.data[i].id,
@@ -80,13 +86,40 @@ function GetPlace() {
                     placesReceived.push(place)
                 }
                 placesReceived.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-                setPlaces(placesReceived)
-            })
-            .catch(err=>{
-                console.log(err)
-                setPlaces([])
-            })
-    }
+      }
+      dispatch(setAllPlaces(placesReceived))
+  }
+
+ 
+
+ 
+
+
+    const [placeId, setPlaceId] = useState('');
+    const [placeTown, setPlaceTown] = useState('');
+    // const [places, setPlaces] = useState([]); //allplaces
+
+    // const retrieveData = url => { axios.get( url ).then( res => {
+    //             const placesReceived = [];
+    //             for (let i = 0; i < res.data.length; i++) {
+    //                 const place = {
+    //                     id: res.data[i].id,
+    //                     street: res.data[i].street,
+    //                     town: res.data[i].town,
+    //                     province: res.data[i].province,
+    //                     imagePath: res.data[i].filepath,
+    //                     date: res.data[i].date
+    //                 }
+    //                 placesReceived.push(place)
+    //             }
+    //             placesReceived.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+    //             setPlaces(placesReceived)
+    //         })
+    //         .catch(err=>{
+    //             console.log(err)
+    //             setPlaces([])
+    //         })
+    // }
 
     const searchById = () => {
         if (placeId){
@@ -107,15 +140,13 @@ function GetPlace() {
         retrieveData(url)
     }
 
-    const updatePlace = () => {
-
-    }
 
     
     return (
         <>
-        <Grid container display="flex" style={{alignItems:'end', margin:'10px', maxWidth:'800px', margin:'auto'}} >
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid container display="flex" style={{alignItems:'end',width:'500px',  justifyContent:'space-between', margin:'auto'}} >
+        <Card style={{padding:'10px',backgroundColor:'#DCEDFE'}}>
+        <Grid item >
             <Search style={{width:'200px', margin:'auto'}}>
                 <SearchIconWrapper>
                   <SearchIcon />
@@ -129,10 +160,12 @@ function GetPlace() {
                 />
             </Search>
 
-            <Button variant="contained" onClick={searchById} >Search place by ID</Button>
+            <Button variant="contained" style={{width:'100%'}} onClick={searchById} >Search place by ID</Button>
           </Grid>
-
-          <Grid item xs={12} md={6}  lg={6}>
+          </Card>
+          <Card style={{padding:'10px', backgroundColor:'#DCEDFE'}}>
+          <Grid item >
+            
               <Search style={{width:'200px', margin:'auto'}}>
                 <SearchIconWrapper>
                   <SearchIcon />
@@ -144,21 +177,16 @@ function GetPlace() {
                 />
               </Search>
               <Button variant="contained" onClick={searchByTown} >Search place by town</Button>
+          
           </Grid>
-
+          </Card>
           <Grid item xs={12} md={12}  lg={12} style={{marginTop:'20px'}} >
-              <Button variant="contained" color='success' onClick={searchAll} >Show all places</Button> 
+              <Button variant="contained" color='secondary' onClick={searchAll} >Show all places</Button> 
           </Grid>
-
             </Grid>
-            <Grid container  display="flex" style={{ justifyContent: 'center'}} >
-                               
-                 {places.map(place=>(
-                  <PlaceCard place={place}/>
-                )
-                )}
-           
-           </Grid>
+            
+            <PlacesContainer places={places}/>
+
         </>
     );
 }

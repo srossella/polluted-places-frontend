@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import { purple } from '@mui/material/colors';
 
 function PlaceCard({place}) {
+    const port= process.env.REACT_APP_BACK_PORT;
     
     return (
        
@@ -35,7 +36,7 @@ function PlaceCard({place}) {
                         <CardMedia
                             component="img"
                             height="194"
-                            image={`http://localhost:8000/${place.imagePath}`}
+                            image={`http://localhost:${port}/${place.imagePath}`}
                             alt="Polluted place"
                         />
                          <CardActions disableSpacing>

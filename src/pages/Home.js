@@ -6,7 +6,7 @@ function Home(props) {
     return (
         <div>
           
-           Here we keep track of all the polluted places 
+           <h2>Here we keep track of all the polluted places </h2>
            <br/>
            <br/>
             <Link to="/search" style={{textDecoration:'none'}}>

@@ -56,8 +56,8 @@ function PostPlace() {
    
     return (
         <div>
-        <Grid container spacing={2} margin={2} style={{justifyContent:'space-between'}} >
-            <Card style={{padding:'10px', backgroundColor:'#DCEDFE'}}>
+        <Grid container spacing={2} margin={2} style={{justifyContent:'space-between', }} >
+            <Card style={{padding:'10px', backgroundColor:'#DCEDFE', margin:'20px'}}>
             
             <h4> Upload a new place</h4>
             
@@ -131,16 +131,14 @@ function PostPlace() {
                 </Card>
            
                 { postedPlace.street ?
-                 (  <Card style={{display:'flex',padding:'10px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
+                 (  <Card style={{display:'flex',padding:'10px', margin:'20px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
                         <h4>Your place with id {postedPlace.id} has been submitted.</h4>
                         <PlaceCard place={postedPlace}/>
                     
                     </Card> 
                  )
                  :null }
-                <br/>
-                
-         
+               
             </Grid>
         </div>
     );

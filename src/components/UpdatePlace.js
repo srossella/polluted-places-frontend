@@ -60,7 +60,7 @@ function UpdatePlace() {
     return (
         <div>
             <Grid container spacing={2} margin={2}  >
-            <Card style={{padding:'10px', backgroundColor:'#DCEDFE'}}>
+            <Card style={{padding:'10px', backgroundColor:'#DCEDFE',margin:'20px'}}>
             <h4>Update place with id {id}</h4>
             <form onSubmit={submitForm}> 
             
@@ -131,6 +131,9 @@ function UpdatePlace() {
                 </Grid>   
                 </form>
                 </Card>
+                
+                
+                
                 {
                     !updated?
                     ( <Card style={{display:'flex',padding:'10px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
@@ -146,7 +149,7 @@ function UpdatePlace() {
                 }
                   
                 { postedPlace.street ?
-                 (  <Card style={{display:'flex',padding:'10px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
+                 (  <Card style={{display:'flex',padding:'10px',margin:'20px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
                  <h4>Your place with id {postedPlace.id} has been updated.</h4>
                         
                          <PlaceCard place={postedPlace}/>
