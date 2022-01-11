@@ -28,12 +28,12 @@ const Navbar = () => {
             <Typography variant="h6" textAlign='left' component="div" sx={{ flexGrow: 1 }}>
               Polluted places
             </Typography>
-            <Button color="inherit">
+            <Button color="inherit" variant="contained" style={{marginRight: '20px'}}>
                 <Link to={'/search'} style={{ textDecoration: 'none'}}> 
                     Search
                 </Link>
             </Button>
-            <Button color="inherit">
+            <Button color="inherit"  variant="contained">
                 <Link to={'/upload'} style={{ textDecoration: 'none'}}> 
                     Upload
                 </Link>
