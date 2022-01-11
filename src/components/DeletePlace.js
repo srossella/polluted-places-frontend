@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 function DeletePlace() {
     const {id} = useParams();
 
-    
     const [placeDeleted, setPlaceDeleted] = useState(false)
 
     const deletePlace = () => {
@@ -24,7 +23,7 @@ function DeletePlace() {
     return (
         <div style={{display:'flex', flexDirection:'column'}}>
             <p style={{margin:'10px'}}>
-                Are you sure you want to delete the place with id {id}?
+                Are you sure you want to delete the place with ID {id}?
             </p>
             <Button style={{width:'fit-content', margin:'auto'}} variant='contained' onClick={deletePlace}>Yes, delete  </Button>
 

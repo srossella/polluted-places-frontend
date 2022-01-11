@@ -7,8 +7,7 @@ import Delete from './pages/Delete.js'
 import Navbar from './components/Navbar';
 import Home from './pages/Home.js'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Footer from './components/Footer.js'
-import Place from './components/PlaceCard';
+import Footer from './components/Footer.js';
 import NotFound from './pages/NotFound';
 
 

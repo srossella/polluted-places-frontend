@@ -1,23 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import PlacesContainer from  './PlacesContainer';
 import Button from '@mui/material/Button';
 import Grid from '@material-ui/core/Grid';
-
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { fontSize } from '@mui/system';
 import { Card } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { setAllPlaces } from '../redux/actions/productActions';
 
 const Search = styled('div')(({ theme }) => ({
@@ -90,37 +82,9 @@ function GetPlace() {
       dispatch(setAllPlaces(placesReceived))
   }
 
- 
-
- 
-
-
     const [placeId, setPlaceId] = useState('');
     const [placeTown, setPlaceTown] = useState('');
-    // const [places, setPlaces] = useState([]); //allplaces
-
-    // const retrieveData = url => { axios.get( url ).then( res => {
-    //             const placesReceived = [];
-    //             for (let i = 0; i < res.data.length; i++) {
-    //                 const place = {
-    //                     id: res.data[i].id,
-    //                     street: res.data[i].street,
-    //                     town: res.data[i].town,
-    //                     province: res.data[i].province,
-    //                     imagePath: res.data[i].filepath,
-    //                     date: res.data[i].date
-    //                 }
-    //                 placesReceived.push(place)
-    //             }
-    //             placesReceived.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-    //             setPlaces(placesReceived)
-    //         })
-    //         .catch(err=>{
-    //             console.log(err)
-    //             setPlaces([])
-    //         })
-    // }
-
+   
     const searchById = () => {
         if (placeId){
             const url= '/places/id/'+ placeId;
@@ -134,14 +98,11 @@ function GetPlace() {
       }
   }
 
-
     const searchAll = () => {
         const url= '/places/';
         retrieveData(url)
     }
 
-
-    
     return (
         <>
         <Grid container display="flex" style={{alignItems:'end',width:'500px',  justifyContent:'space-between', margin:'auto'}} >
@@ -184,9 +145,7 @@ function GetPlace() {
               <Button variant="contained" color='secondary' onClick={searchAll} >Show all places</Button> 
           </Grid>
             </Grid>
-            
             <PlacesContainer places={places}/>
-
         </>
     );
 }

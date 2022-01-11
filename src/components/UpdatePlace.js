@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Input } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -16,7 +15,7 @@ function UpdatePlace() {
     const [place, setPlace] = useState({})
     const [file, setFile] = useState('');
     const [postedPlace, setPostedPlace] = useState({})
-    const [updated, setUpdated] =useState(true)
+    const [updated, setUpdated] = useState(true)
 
     const submitForm = (e) => {
         e.preventDefault() 

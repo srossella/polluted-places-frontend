@@ -1,20 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { Input } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import { InputLabel } from '@mui/material';
 import PlaceCard from './PlaceCard';
 import { Card } from '@mui/material';
+
 function PostPlace() {
 
     const [place, setPlace] = useState({})
@@ -26,7 +19,6 @@ function PostPlace() {
         setFile('')
         setPostedPlace({})
     }
-
 
     const submitForm = (e) => {
         e.preventDefault() 
@@ -124,20 +116,20 @@ function PostPlace() {
                 <Grid item md={12} padding={1}>
                      <Button variant="contained"  type="submit">Submit place </Button>
                 </Grid> 
-                <Grid item md={12} padding={1}>
-                    <Button variant="outlined" type="reset" value="Reset" onClick={clearUpload} >Reset</Button>
-                </Grid>   
+                    <Grid item md={12} padding={1}>
+                        <Button variant="outlined" type="reset" value="Reset" onClick={clearUpload} >Reset</Button>
+                    </Grid>   
                 </form>
                 </Card>
            
-                { postedPlace.street ?
-                 (  <Card style={{display:'flex',padding:'10px', margin:'20px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
+                { postedPlace.street 
+                  ? (  <Card style={{display:'flex',padding:'10px', margin:'20px', flexDirection:'column',backgroundColor:'#DCEDFE'}}>
                         <h4>Your place with id {postedPlace.id} has been submitted.</h4>
                         <PlaceCard place={postedPlace}/>
                     
                     </Card> 
-                 )
-                 :null }
+                    )
+                  : null }
                
             </Grid>
         </div>
