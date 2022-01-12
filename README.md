@@ -76,13 +76,13 @@ Install the latest version of `npm`
    npm install
    ```
 
-4. Rename the file .env.example to .env in the root folder and insert your backend API port:
+3. Rename the file .env.example to .env in the root folder and insert your backend API port:
 
    ```sh
    REACT_APP_BACK_PORT= 'your backend port' 
    ```
 
-5. Run development version 
+4. Run development version 
 
    ```sh
    npm start
