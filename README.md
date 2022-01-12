@@ -34,7 +34,7 @@
 
 ## About The Project & usage
 
-![Product Name Screen Shot](public/img/screenshot.png)
+![Product Name Screen Shot](public/screenshot.png)
 This front end project provides a user interface for the backend project [Polluted Places](https://github.com/srossella/polluted-places-api). It is built with React & Redux. 
 
 It shows all the collections of polluted places (with address and photo) saved in the database and it is possible to view, update and delete each individual place, as well as add new places.  
